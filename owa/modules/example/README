@@ -1,0 +1,22 @@
+Open Web Analytics: Example Module 
+
+Open Web Analytics is an open source web site analytics program. With some
+modification, it is possibile to use it for application analytics for the Puppet
+Patch Manager web application. However, like many analytics programs, OWA is
+mainly designed to say *who* is using your website (which the PPM team already
+knows), with only rudimentary reports describing *how* they use it (which PPM
+wants to know). Currently, OWA only has a couple reports describing how
+frequently certain actions are triggered. Therefore, it is likely that PPM will
+want to be able to create customized reports to display the data it needs to
+know.
+
+Although there is some documentation on the OWA website, it is very sparse, with
+almost nothing about how developers can create customized report pages.
+Therefore I have written this example module to show through illustrative
+examples how a developer can create a custom module, create custom report pages,
+get data from the database, and display in various. Some of these examples use
+existing features in the OWA code. Others are more customized.
+
+The best place for developers to start is in the modules/example/module.php
+folder. The comments there will explain how modules work, and direct you to
+other logical files to look at.

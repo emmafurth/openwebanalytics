@@ -1,0 +1,36 @@
+Some notes for PPM developers:
+
+A general note: 
+-----------------
+It is worth noting that the problems that PPM wants to solve with app
+analytics is not precisely the same as the problem that OWA was designed to
+solve. OWA was mainly designed to report on *who* is visiting your website, with
+some rudimentary information on *how* people use the website. PPM already knows
+who is using their program, and mainly wants to know *how* they are using it.
+
+Fortunately, OWA was also written to be extendable by developers, so this
+problem is not insurmountable. However, PPM developers should keep it in mind
+when extending the code.
+
+On how to track visitors usage of the site:
+----------------------------------------------------
+For instructions on how to track visitors and visitor-triggered-events using
+Javascript, see this page:
+
+Mostly, sending event data to the database is simple. There is one wrinkle to
+keep in mind, however. One thing that PPM wants is the ability to associate
+user actions with the user who triggered them. In theory, OWA can do this: each
+visitor to your website (or web app) is assigned a unique VisitorId that is associated with
+every action they trigger. In practice, it's not so neat: while tracking a test
+website on my localhost, I visited the website several times, and OWA attributed
+my visits to six different visitors, each with different visitorIDs. 
+
+There is a way around this: each Visitor has an associated "user_name" field. It
+appears that this is meant to match the user_names used to log in to your
+instance of OWA web app (possibly to distinguish developor-visitors from
+"normal" visitors?). However, we can instead insert the unique name of the PPM
+user in that field, and use that to uniquely identify PPM users instead.
+
+To do that, one need only insert the line:
+	owa_cmds.push(['setUserName', 'customerName']);
+into the tracking code

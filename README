@@ -1,0 +1,19 @@
+A note about testing on localhosts:
+
+There is a bug in OWA such that the site will not set cookies if you do not
+have OWA installed on a fully qualified web domain. That is, if you install 
+OWA on local host, and tell it that it is installed on localhost (or give it
+an IP address, like 127.0.0.1), OWA will be unable to set cookies properly. 
+This means that you will not be able to, for example, log in after 
+installation.
+
+To fix this, do the following:
+1) Go to your /etc/hosts file and add an alias for your localhost that is 
+an FQDN. E.g.: fakedomain.net
+2) When installing OWA on your localhost, and it asks for the domain, 
+give it the alias. Do NOT include the www. Alternatively, if you are using 
+owa-config.php to configure your installation, replace the line
+	define('OWA_PUBLIC_URL', 'http://domain/path/to/owa/');
+with
+	define('OWA_PUBLIC_URL', 'http://fakedomain.net/');
+
